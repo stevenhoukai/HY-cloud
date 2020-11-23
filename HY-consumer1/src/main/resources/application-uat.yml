@@ -1,0 +1,94 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: utf-8
+spring:
+  profiles: uat
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  application:
+    name: yyconsumer-ass-svc
+  security:
+    user:
+      roles: ACTUATOR_ADMIN
+      name: actuator
+      password: AA@4321,
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://123.12.13.53:8761/eureka/,http://123.12.13.53:8762/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: ${NODE_IP}
+    non-secure-port: ${NODE_PORT}
+    instance-id: ${NODE_IP}:${NODE_PORT}
+    hostname: ${NODE_IP}
+    status-page-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/info
+    health-check-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/health
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      management.port: ${NODE_PORT}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+      health:
+      show-details: always
+    health:
+      db:
+        enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    db:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+logging:
+  file: /tmp/app.log
+level:
+  root: info
+swagger:
+  enable: false
+rest:
+  location:
+    prefix: http://yyprovider-ass-svc
+    taskprefix: http://yyquart-ass-svc
+  session:
+    redisusersessionkey: redisUserSessionKey
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+icbc:
+  base: http://123.12.13.53:20007
+  ai63015: /dsr/dsr/ai63015.flowc?flowActionName=ai63015unxml
+
+info:
+  app:
+    name: consumer
+
+#导出文件时临时存放文件夹
+export:
+  path:
+    pdf: /tmp/exprot/pdffile
+    txt: /tmp/exprot/txtfile
+

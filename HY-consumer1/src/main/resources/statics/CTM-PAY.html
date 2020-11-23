@@ -1,0 +1,157 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<style>
+		@page {
+			size: a4
+		}
+
+		body {
+			font-size: 10px;
+			font-family: MingLiU;
+		}
+
+		table.px {
+			border-collapse: collapse;
+			margin-top: 10px
+		}
+
+		table.px td {
+			border: 1px solid gray;
+			height: 30px;
+			line-height: 30px;
+			padding: 0px 8px;
+		}
+
+		table.ct td {
+			border: 0px
+		}
+
+		td.title {
+			font-size: 10px
+		}
+
+		td.pagehead {
+			font-size: 10px;
+			color: #9f9f9f
+		}
+
+		td.pager div {
+			height: 1px;
+			background: #9f9f9f;
+			width: 100%;
+			overflow: hidden;
+			font-size: 0;
+		}
+
+		table.header {
+			margin-bottom: 20px
+		}
+
+		table.footer {
+			margin-top: 50px;
+		}
+
+		td {
+			padding-right: 20px;
+			font-size: 10px;
+		}
+	</style>
+</head>
+
+<body>
+<#list datalist as data>
+<table align="left" width="100%">
+	<tr>
+		<td align="left" >****ICBC****</td>
+		<td align="left" colspan="3">&nbsp;&nbsp;SYS DATE ${data.sysdatetime} </td>
+		<td align="left">PAGE ${data.page}</td>
+	</tr>
+	<tr>
+		<td> </td>
+	</tr>
+	<tr>
+		<td align="center" colspan="5">INDUSTRIAL AND COMMERCIAL BANK OF CHINA (MACAU) LIMITED.</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="5">AUTO-PAY -COM. DE TELE. DE MACAU S.A.R.L.</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="5">ACCEpxED TRANSACTIONS REPORT</td>
+	</tr>
+	<tr>
+		<td align="left" colspan="3">COMPANY ID :COM. DE TELE. DE MA</td>
+		<td align="right">DEBIT DATE: ${data.tranDate}</td>
+	</tr>
+	<tr>
+		<td align="left">CONTRACT    NUMBER</td>
+		<td align="left">PAYMENT AMOUNT</td>
+		<td align="left">DR ACCOUNT NO</td>
+		<td align="left" colspan="2">A/C NAME</td>
+	</tr>
+	<tr>
+		<td align="left">***************</td>
+		<td align="left">**************</td>
+		<td align="left">*******************</td>
+		<td align="left" colspan="2">*********************************************</td>
+	</tr>
+	<#list data.childList as child>
+	<tr>
+		<td align="left">${child.customerContract}</td>
+		<td align="right">${child.amount}</td>
+		<td align="left">${child.customerAccount}</td>
+		<td align="left" colspan="2">${child.customerName}</td>
+	</tr>
+	</#list>
+</table>
+</#list>
+<p> </p>
+<table align="left" width="100%">
+	<tr>
+		<td align="left">TOTAL</td>
+	</tr>
+	<tr>
+		<td align="left" colspan="7">***********************************************************************************************************</td>
+	</tr>
+	<tr>
+		<td align="left">AMOUNT DUE</td>
+		<td align="left">GOOD DEBIT</td>
+		<td align="left">PAYMENT AMOUNT</td>
+		<td align="left">REJECT RECORD</td>
+		<td align="left">REJECT AMOUNT</td>
+		<td align="left">NEW SETUP</td>
+		<td align="left">CANCEL SERVICE</td>
+	</tr>
+	<tr>
+		<td align="left">**********</td>
+		<td align="left">**********</td>
+		<td align="left">**************</td>
+		<td align="left">*************</td>
+		<td align="left">*************</td>
+		<td align="left">*********</td>
+		<td align="left">**************</td>
+	</tr>
+	<tr>
+		<td align="left">${totaldata.amountDue}</td>
+		<td align="left">${totaldata.goodDebit}</td>
+		<td align="left">${totaldata.paymentAmount}</td>
+		<td align="left">${totaldata.rejectRecord}</td>
+		<td align="left">${totaldata.rejectAmount}</td>
+		<td align="left">${totaldata.newSetup}</td>
+		<td align="left">${totaldata.cancelService}</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="right" colspan="7">*** END OF REPORT ***</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+#服务端口
+
+NODE_IP: 127.0.0.1
+NODE_PORT: 8096
+server:
+  port: 8096
+  tomcat:
+    uri-encoding: utf-8
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  profiles: dev
+  application:
+    name: yyquart-ass-svc #注册的服务application名称，用于ribbon调用
+  security:
+    user:
+      roles: ACTUATOR_ADMIN
+      name: yyicbc
+      password: 123456
+  datasource:
+    url: jdbc:mysql://10.170.198.239:33060/yymacau?&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化大小，最小，最大O
+    initialSize: 10
+    minIdle: 10
+    maxActive: 30
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的filters,去掉监控界面sql无法统计，‘wall’用于防火墙
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 30
+    userGlobalDataSourceStat: true
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+  quartz:
+    job-store-type: jdbc #数据库方式
+    jdbc:
+      initialize-schema: never #始化表结构
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO #默认主机名和时间戳生成实例ID,可以是任何字符串，但对于所有调度程序来说，必须是唯一的 对应qrtz_scheduler_state INSTANCE_NAME字段
+            instanceName: clusteredScheduler #quartzScheduler
+            startupDelay: 10
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX #持久化配置
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate #我们仅为数据库制作了特定于数据库的代理
+            useProperties: false #以指示JDBCJobStore将JobDataMaps中的所有值都作为字符串，因此可以作为名称 - 值对存储而不是在BLOB列中以其序列化形式存储更多复杂的对象。从长远来看，这是更安全的，因为您避免了将非String类序列化为BLOB的类版本问题。
+            tablePrefix: TASK_  #数据库表前缀
+            misfireThreshold: 60000 #在被认为“失火”之前，调度程序将“容忍”一个Triggers将其下一个启动时间通过的毫秒数。默认值（如果您在配置中未输入此属性）为60000（60秒）。
+            clusterCheckinInterval: 5000 #设置此实例“检入”*与群集的其他实例的频率（以毫秒为单位）。影响检测失败实例的速度。
+            isClustered: true #打开群集功能
+          threadPool: #连接池
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 25
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+
+eureka:
+  client:
+    #是否將自己註冊到註冊中心，開發環境默認關閉，可按需打開
+    register-with-eureka: true
+    service-url:
+      #配置eureka集群地址
+      defaultZone: http://eureka8001.com:8001/eureka
+    healthcheck:
+      enabled: true
+
+  instance:
+    prefer-ip-address: true
+    ip-address: ${NODE_IP}
+    non-secure-port: ${NODE_PORT}
+    hostname: ${NODE_IP}:${NODE_PORT}
+    instance-id: ${NODE_IP}:${NODE_PORT}
+    status-page-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/info
+    health-check-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/health
+    metadata-map:
+      management.port: ${NODE_PORT}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+      health:
+        show-details: always
+
+
+#日志配置
+logging:
+  file: /tmp/app.log
+level:
+  root: info
+
+
+ftp:
+  url: 10.170.198.239
+  user: ftpuser
+  pass: 123456
+  basePath: /home/ftpuser/files
+
+
+info:
+  app:
+    name: q-provider
+

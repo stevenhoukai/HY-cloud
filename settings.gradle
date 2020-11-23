@@ -1,0 +1,14 @@
+rootProject.name = 'HY-cloud'
+
+include ('HY-eureka')
+//include ('HY-consumer1')
+include ('HY-provider')
+include ('HY-bapi')
+include ('HY-quartzprovider')
+include ('HY-admin')
+
+//以下部分暂时不参与编译打包
+include('HY-zuul')
+//include('HY-myconfigs')
+
+

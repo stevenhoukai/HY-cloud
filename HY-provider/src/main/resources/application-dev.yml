@@ -1,0 +1,140 @@
+#服务端口配置
+NODE_IP: 127.0.0.1
+NODE_PORT: 8094
+server:
+  port: 8094
+  tomcat:
+    uri-encoding: utf-8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+#spring相关配置
+spring:
+  profiles: dev
+  application:
+    name: yyprovider-ass-svc #注册的服务application名称，用于ribbon调用
+  security:
+    user:
+      roles: ACTUATOR_ADMIN
+      name: yyicbc
+      password: 123456
+    session:
+      store-type: none
+  datasource:
+    url: jdbc:mysql://10.170.198.239:33060/yymacau?&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化大小，最小，最大
+    initialSize: 10
+    minIdle: 10
+    maxActive: 30
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的filters,去掉监控界面sql无法统计，‘wall’用于防火墙
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    userGlobalDataSourceStat: true
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    rewriteBatchedStatements: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+#  mail:
+#    host: smtp.qq.com
+#    username: 348008515@qq.com  #发送方的邮箱
+#    password: hnugbtnepevjcaje  # 设置密码，该处的密码是发送方QQ邮箱开启SMTP的授权码而非QQ密码
+
+#配置服务的provider需要往哪一个地址注册服务
+#eureka:
+#  client:
+#    service-url:
+#      #    defaultZone: http://eureka8001.com:8001/eureka,http://eureka8002.com:8002/eureka,http://eureka8003.com:8003/eureka
+#      defaultZone: http://eureka8001.com:8001/eureka
+#      instance:
+#        instance-id: mservicepro1-8094 #注册的服务的实例名称
+#        prefer-ip-address: true
+#配置服务的provider需要往哪一个地址注册服务
+eureka:
+  client:
+    #是否將自己註冊到註冊中心，開發環境默認關閉，可按需打開
+    register-with-eureka: true
+    service-url:
+      #    defaultZone: http://eureka8001.com:8001/eureka,http://eureka8002.com:8002/eureka,http://eureka8003.com:8003/eureka
+      defaultZone: http://eureka8001.com:8001/eureka
+      healthcheck:
+        enabled: true
+  instance:
+    prefer-ip-address: true
+    ip-address: ${NODE_IP}
+    non-secure-port: ${NODE_PORT}
+    hostname: ${NODE_IP}:${NODE_PORT}
+    instance-id: ${NODE_IP}:${NODE_PORT}
+    status-page-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/info
+    health-check-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/health
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      management.port: ${NODE_PORT}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
+#日志配置
+logging:
+  file: /tmp/app.log
+level:
+  #此處可以調整日誌級別
+  root: info
+
+#配置每页显示行数
+commons:
+  page:
+    size: 10
+#配置个人token过期时间
+jwt:
+  config:
+    key: yonyouicbc
+    ttl: 432000000
+#配置文件服务器地址以及用户密码
+ftp:
+  url: 10.170.198.239
+  user: ftpuser
+  pass: 123456
+  basePath: /home/ftpuser/files
+
+info:
+  app:
+    name: provider
+
+

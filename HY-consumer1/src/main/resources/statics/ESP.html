@@ -1,0 +1,142 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			@page {
+				size: a4
+			}
+			
+			body {
+				font-size: 100pt;
+				font-family: MingLiU;
+			}
+			
+			table.pt {
+				border-collapse: collapse;
+				margin-top: 10px
+			}
+			
+			table.pt td {
+				border: 1px solid gray;
+				height: 20px;
+				line-height: 20px;
+				padding: 0px 8px;
+			}
+			
+			table.ct td {
+				border: 0px
+			}
+			
+			td.title {
+				font-size: 10pt
+			}
+			
+			td.pagehead {
+				font-size: 10px;
+				color: #9f9f9f
+			}
+			
+			td.pager div {
+				height: 1px;
+				background: #9f9f9f;
+				width: 100%;
+				overflow: hidden;
+				font-size: 0;
+			}
+			
+			table.header {
+				margin-bottom: 20px
+			}
+			
+			table.footer {
+				margin-top: 50px;
+				padding: 0px;
+				margin: 0px;
+			}
+			td {
+				font-size: 10px;
+				padding: 5px;
+				height: 10px;
+				line-height: 10px;
+				
+			}
+			
+			.b1{
+				border-bottom:medium double ;
+			}
+			.b2{
+				border-bottom:solid 0.5px;
+			}
+			.b3{
+				border-bottom:solid 0.5px
+			}
+			.b4{
+				border-top:solid 0.5px
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<#list datalist as data>
+		<table align="left" width="100%" style="border-collapse:collapse" class="b1">
+			<tr>
+				<td align="center" colspan="7">中國工商銀行(澳門)股份有限公司</td>
+			</tr>
+			<tr>
+				<td align="center" colspan="7">聖保祿自動轉賬(成功與失敗)交易報表</td>
+			</tr>
+			<tr>
+				<td align="right" colspan="6">交易日期 :</td>
+				<td align="left" >${data.tranDate}</td>
+			</tr>
+			<tr>
+				<td align="right" colspan="6">發起方賬戶號碼 :</td>
+				<td align="left">${data.company_account}</td>
+			</tr>
+			<tr>
+				<td align="left" class="b1">交易序號</td>
+				<td align="left" class="b1">學生編號</td>
+				<td align="left" class="b1">級別</td>
+				<td align="left" class="b1">學生姓名</td>
+				<td align="right" class="b1" colspan="2">扣賬金額</td>
+				<td align="left" class="b1">交易失敗原因</td>
+			</tr>
+
+			<#list data.childList as child>
+			<tr>
+				<td align="left" class="b2">${child.fova_update_sernum}</td>
+				<td align="left" class="b2">${child.customerAccount}</td>
+				<td align="left" class="b2">${child.customerName}</td>
+				<td align="left" class="b2">${child.customerName}</td>
+				<td align="right" class="b2" colspan="2">${child.amount}</td>
+				<td align="left" class="b2">${child.errMessage}</td>
+			</tr>
+			</#list>
+		</table>
+		</#list>
+		<br>&nbsp;</br>
+		<table align="left" width="100%" style="border-collapse:collapse" class="b4">
+			<tr>
+				<td align="right" valign="bottom"><u>總交易記錄</u></td>
+				<td align="right" valign="bottom"><u>總交易金額</u></td>
+				<td align="right" valign="bottom"><u>成功交易筆數</u></td>
+				<td align="right" valign="bottom"><u>成功交易總金額</u></td>
+				<td align="right" valign="bottom"><u>失敗交易筆數</u></td>
+				<td align="right" valign="bottom"><u>失敗交易金額</u></td>
+			</tr>			
+			<tr>
+				<td align="right" valign="top">${totaldata.record}</td>
+				<td align="right" valign="top">${totaldata.amountDue}</td>
+				<td align="right" valign="top">${totaldata.goodDebit}</td>
+				<td align="right" valign="top">${totaldata.paymentAmount}</td>
+				<td align="right" valign="top">${totaldata.rejectRecord}</td>
+				<td align="right" valign="top">${totaldata.rejectAmount}</td>
+			</tr>		
+			
+		</table>
+
+	</body>
+
+</html>

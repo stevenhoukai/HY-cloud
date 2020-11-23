@@ -1,0 +1,7 @@
+#配置消费端的服务端口
+#消费端只负责接收请求，然后去eureka注册中心寻找服务；
+server:
+  port: 8080
+spring:
+  profiles:
+    active: test

@@ -1,0 +1,99 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'http://repo.maven.apache.org/maven2' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'com.yyicbc'
+
+
+ext {
+    springCloudVersion = 'Finchley.SR1'
+}
+
+
+allprojects {
+    version 'beta'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'http://repo.maven.apache.org/maven2' }
+    }
+
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
+    configurations {
+        providedRuntime
+    }
+
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-actuator:2.0.3.RELEASE')
+        compile('org.springframework.boot:spring-boot-starter-security:2.0.3.RELEASE')
+        implementation ('org.springframework.boot:spring-boot-devtools')
+        runtimeOnly('io.micrometer:micrometer-registry-prometheus')
+        providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+//        compile files(rootProject.getRootDir().getAbsolutePath()+'/gradle/lib/icbc_2.0.0.4.jar')
+//        compile files(rootProject.getRootDir().getAbsolutePath()+'/gradle/lib/ISFJ_v2_0_1_127_3_BAISC_JDK14.jar')
+    }
+
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
+
+
+
+
+
+
+//根据实际需要进行加入，本项目只需要一个eureka和两个provider jar以及一个consumer jar
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-eureka1.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-provider1.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-consumer1.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-quartzprovider.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-eureka2.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-eureka3.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-zuul.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-myconfigs.gradle"
+
+//apply from: rootProject.getRootDir().getAbsolutePath()+"/gradle/yyicbc-consumer-feignhystrix.gradle"

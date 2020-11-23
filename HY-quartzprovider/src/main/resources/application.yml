@@ -1,0 +1,11 @@
+#服务端口
+server:
+  port: 8080
+
+
+#spring:
+#  profile:
+#    active: dev1
+spring:
+  profiles:
+    active: dev

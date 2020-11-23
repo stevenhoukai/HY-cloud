@@ -1,0 +1,137 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<style>
+		@page {
+			size: a4
+		}
+
+		body {
+			font-size: 10px;
+			font-family: MingLiU;
+		}
+
+		table.px {
+			border-collapse: collapse;
+			margin-top: 10px
+		}
+
+		table.px td {
+			border: 1px solid gray;
+			height: 30px;
+			line-height: 30px;
+			padding: 0px 8px;
+		}
+
+		table.ct td {
+			border: 0px
+		}
+
+		td.title {
+			font-size: 10px
+		}
+
+		td.pagehead {
+			font-size: 10px;
+			color: #9f9f9f
+		}
+
+		td.pager div {
+			height: 1px;
+			background: #9f9f9f;
+			width: 100%;
+			overflow: hidden;
+			font-size: 0;
+		}
+
+		table.header {
+			margin-bottom: 20px
+		}
+
+		table.footer {
+			margin-top: 50px;
+		}
+
+		td {
+			font-size: 10px;
+		}
+		.b1{
+			border-bottom:double;
+		}
+		.b2{
+			border-bottom:solid 1px;
+		}
+		.b3{
+			border-bottom:solid 1px
+		}
+		.b4{
+			border-top:solid 1px
+		}
+	</style>
+</head>
+
+<body>
+
+<table align="center" width="600" style="border-collapse:collapse">
+	<tr>
+		<td valign="top" width="20" height="30">致  </td>
+		<td align="left"  valign="top" width="300" >${company_name}</td>
+		<td valign="top"  width="150"> </td>
+		<td valign="top" align="left" width="100" >Date日期</td>
+		<td valign="top" align="left" width="20">:</td>
+		<td valign="top" align="left" width="100">${tranDate}</td>
+	</tr>
+	<tr>
+		<td valign="top" width="20" height="30"></td>
+		<td align="left" width="300"></td>
+		<td valign="top" width="150"> </td>
+		<td valign="top" align="left" >Cuuency幣別</td>
+		<td valign="top" align="left" width="20" >:</td>
+		<td valign="top" align="left"> ${currType} </td>
+	</tr>
+	<tr>
+		<td width="20" height="30"></td>
+		<td align="left" width="300"></td>
+		<td valign="top" width="150"> </td>
+		<td valign="top" align="left">Account帳號</td>
+		<td valign="top" align="left" width="20">:</td>
+		<td valign="top" align="left">${company_account}</td>
+	</tr>
+	<tr>
+		<td align="left" height="100"></td>
+	</tr>
+</table>
+
+<table align="center" width="600"  >
+	<tr>
+		<td align="left" colspan="5">Please be infomed that the amount shown below is debited from your A/C ${company_account}</td>
+	</tr>
+	<tr>
+		<td align="left" height="20"></td>
+	</tr>
+	<tr>
+		<td align="left" colspan="5">兹通知 - 以下款項已於閣下之賬戶號碼 ${company_account} 扣除</td>
+	</tr>
+	<tr>
+		<td align="left" height="50"></td>
+	</tr>
+	<tr>
+		<td class ='b2' width="50">Date 日期</td>
+		<td  width="10"></td>
+		<td class ='b2' >Particulars 摘要</td>
+		<td  width="10"></td>
+		<td class ='b2'  width="150" align="right"  colspan="2" >Debit Movement 支付</td>
+	</tr>
+	<tr>
+		<td>${tranDate}</td>
+		<td  width="10"></td>
+		<td >Auto</td>
+		<td  width="10"></td>
+		<td class="b1" width="150" align="right" height="30" >${totaldata.paymentAmount}</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

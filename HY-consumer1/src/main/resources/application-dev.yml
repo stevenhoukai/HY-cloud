@@ -1,0 +1,121 @@
+#配置消费端的服务端口
+#消费端只负责接收请求，然后去eureka注册中心寻找服务；
+NODE_IP: 10.170.198.239
+NODE_PORT: 8081
+
+
+spring:
+  profiles: dev
+  application:
+    name: yyconsumer-ass-svc
+  security:
+    user:
+      roles: ACTUATOR_ADMIN
+      name: yyicbc
+      password: 123456
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: utf-8
+
+management:
+  health:
+    db:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://eureka8001.com:8001/eureka
+#      #配置eureka集群地址
+##      defaultZone: eureka8001.com:8001/eureka,http://eureka8002.com:8002/eureka,http://eureka8003.com:8003/eureka
+#    register-with-eureka: false
+
+
+
+
+eureka:
+  client:
+    #是否將自己註冊到註冊中心，開發環境默認關閉，可按需打開
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://10.170.198.237:8002/eureka
+    healthcheck:
+      enabled: true
+  instance:
+    prefer-ip-address: true
+    ip-address: ${NODE_IP}
+    non-secure-port: ${NODE_PORT}
+    hostname: ${NODE_IP}:${NODE_PORT}
+    instance-id: ${NODE_IP}:${NODE_PORT}
+    status-page-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/info
+    health-check-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/health
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      management.port: ${NODE_PORT}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
+#日志配置
+logging:
+  file: /tmp/app.log
+level:
+  #此處可以調整日誌級別
+  root: info
+
+#该配置是启用zuul并基于zuul配置的前缀访问规则，并且禁用了appid进行直接调用
+#开启了zuul看这里
+#rest:
+#  location:
+#    prefix: http://myzuul.com:9001/yymacau/yyicbc
+
+
+#该配置是没有启用zuul，直接通过服务注册id进行服务调用
+#没有开启了zuul看这里
+rest:
+  location:
+    #    prefix: http://yyicbcservice-pro1
+    #    taskprefix: http://yyicbcservice-quartz
+    prefix: http://yyprovider-ass-svc
+    taskprefix: http://yyquart-ass-svc
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds=5000:
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+icbc:
+  base: http://123.13.125.121:8001
+  ai63015: /dsr/dsr/ai63015.flowc?flowActionName=ai63015unxml
+
+
+info:
+  app:
+    name: consumer
+
+#导出文件时临时存放文件夹
+export:
+  path:
+    pdf: /tmp/exprot/pdffile
+    txt: /tmp/exprot/txtfile
+

@@ -1,0 +1,123 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        @page {
+            size: a4
+        }
+
+        body {
+            font-size: 10px;
+            font-family: MingLiU;
+        }
+
+        table.px {
+            border-collapse: collapse;
+            margin-top: 10px
+        }
+
+        table.px td {
+            border: 1px solid gray;
+            height: 30px;
+            line-height: 30px;
+            padding: 0px 8px;
+        }
+
+        table.ct td {
+            border: 0px
+        }
+
+        td.title {
+            font-size: 10px
+        }
+
+        td.pagehead {
+            font-size: 10px;
+            color: #9f9f9f
+        }
+
+        td.pager div {
+            height: 1px;
+            background: #9f9f9f;
+            width: 100%;
+            overflow: hidden;
+            font-size: 0;
+        }
+
+        table.header {
+            margin-bottom: 20px
+        }
+
+        table.footer {
+            margin-top: 50px;
+        }
+
+        td {
+            padding-right: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+<#list datalist as data>
+<table align="left" width="100%">
+    <tr>
+        <td align="left">****ICBC****</td>
+        <td align="left" colspan="3">SYS DATE ${data.sysdatetime} </td>
+        <td align="left">PAGE ${data.page}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="5">INDUSTRIAL AND COMMERCIAL BANK OF CHINA (MACAU) LIMITED.</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="5">DEBIT AUTHORIZATION LIST -NEW APPLICANTS</td>
+    </tr>
+
+    <tr>
+        <td align="left" colspan="3">CREDIT PARTY :CTM</td>
+        <td align="right" colspan="2">AUTO-PAY APPLICATION DATE: ${data.tranDate}</td>
+    </tr>
+    <tr>
+        <td align="left">PAYMENT REF</td>
+        <td align="left">DEBIT LIMIT</td>
+        <td align="left" >DR ACCOUNT NO</td>
+        <td align="left" >APPLICATION DATE</td>
+        <td align="left" >ACCOUNT NAME</td>
+    </tr>
+    <tr>
+        <td align="left">********************</td>
+        <td align="left">***********</td>
+        <td align="left" >*******************</td>
+        <td align="left" >****************</td>
+        <td align="left" >****************************</td>
+    </tr>
+    <#list data.childList as child>
+    <tr>
+        <td align="left">${child.customerContract}</td>
+        <td align="left">---</td>
+        <td align="left" >${child.customerAccount}</td>
+        <td align="left" >${child.tranDate}</td>
+        <td align="left" >${child.customerName}</td>
+    </tr>
+</#list>
+</table>
+</#list>
+<p> </p>
+<table align="left" width="100%">
+    <tr>
+        <td align="left">TOTAL OF NEW APPLICATION RECORDS :${totaldata.newSetup}</td>
+    </tr>
+
+    <tr>
+        <td align="center">*** END OF REPORT ***</td>
+    </tr>
+</table>
+
+</body>
+
+</html>

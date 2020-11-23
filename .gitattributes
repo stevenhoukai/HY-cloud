@@ -1,0 +1,9 @@
+/build.gradle merge=ours 
+/yyicbc-admim/build.gradle merge=ours 
+/yyicbc-eureka1/build.gradle merge=ours 
+/yyicbc-consumer1/build.gradle merge=ours 
+/yyicbc-consumer1/docker/build.sh merge=ours
+/yyicbc-provider1/build.gradle merge=ours 
+/yyicbc-provider1/docker/build.sh merge=ours
+/yyicbc-quartzprovider/build.gradle merge=ours 
+/yyicbc-quartzprovider/docker/build.sh merge=ours 

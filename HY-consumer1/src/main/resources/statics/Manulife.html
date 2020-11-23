@@ -1,0 +1,152 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<style>
+		@page {
+			size: a4
+		}
+
+		body {
+			font-size: 10px;
+			font-family: MingLiU;
+		}
+
+		table.px {
+			border-collapse: collapse;
+			margin-top: 10px
+		}
+
+		table.px td {
+			border: 1px solid gray;
+			height: 30px;
+			line-height: 30px;
+			padding: 0px 8px;
+		}
+
+		table.ct td {
+			border: 0px
+		}
+
+		td.title {
+			font-size: 10px
+		}
+
+		td.pagehead {
+			font-size: 10px;
+			color: #9f9f9f
+		}
+
+		td.pager div {
+			height: 1px;
+			background: #9f9f9f;
+			width: 100%;
+			overflow: hidden;
+			font-size: 0;
+		}
+
+		table.header {
+			margin-bottom: 20px
+		}
+
+		table.footer {
+			margin-top: 50px;
+		}
+
+		td {
+			padding-right: 20px;
+			font-size: 10px;
+		}
+			.b1{
+				border-bottom:medium double  ;
+			}
+			.b2{
+				border-bottom:solid 0.5px;
+			}
+			.b3{
+				border-bottom:solid 0.5px
+			}
+			.b4{
+				border-top:solid 0.5px
+			}
+			
+	</style>
+</head>
+
+<body>
+<#list datalist as data>
+<table align="left" width="100%" style="border-collapse:collapse">	
+	<tr>
+		<td align="center" colspan="7">INDUSTRIAL AND COMMERCIAL BANK OF CHINA (MACAU) LIMITED.</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="7">AUTO-PAYMENT OF MANULIFE (INTERNATIONAL) LIMITED</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="7">ACCEPTED AND REJECTED TRANSACTIONS REPORT</td>
+	</tr>
+	<tr>
+		<td align="right" colspan="6">PAYMENT DATE :</td>
+		<td align="left" >${data.tranDate}</td>
+	</tr>
+	<tr>
+		<td align="right" colspan="6">CR ACCOUNT NO: </td>
+		<td align="left">${data.company_account}</td>
+	</tr>
+	<tr>
+		<td align="left"  class="b1">POLICY NO<br></br>REMARK</td>
+		<td align="left"  class="b1">ACCOUNT NO</td>
+		<td align="left"  class="b1">ACCOUNT NAME</td>
+		<td align="left"  class="b1">CCY</td>
+		<td align="right"  class="b1">DR AMOUNT</td>
+		<td align="left"  class="b1"  colspan="2"  >RESULT DESC</td>
+	</tr>
+	<#list data.childList as child>
+	<tr>
+		<td align="left" class="b2">${child.agentNo}</td>
+		<td align="left" class="b2">${child.customerAccount}</td>
+		<td align="left" class="b2">${child.customerName}</td>
+		<td align="left" class="b2">${child.currType}</td>
+		<td align="right" class="b2">${child.amount}</td>
+		<td align="left" colspan="2" class="b2">${child.errMessage}</td>
+
+	</tr>
+	</#list>
+</table>
+</#list>
+<br>&nbsp;</br>
+<table align="left" width="100%"  style="border-collapse:collapse" class="b4" >
+	<tr>
+		<td align="right" valign="bottom"><u>TOTAL REC</u></td>
+		<td align="right" valign="bottom"><u>TOTAL PAYMENT AMOUNT</u></td>
+		<td align="right" valign="bottom"><u>ACCEPTED REC</u></td>
+		<td align="right" valign="bottom"><u>ACCEPTED AMOUNT</u></td>
+		<td align="right" valign="bottom"><u>REJECTED REC</u></td>
+		<td align="right" valign="bottom"><u>REJECTED AMOUNT</u></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top">${totaldata.record}</td>
+		<td align="right" valign="top">${totaldata.amountDue}</td>
+		<td align="right" valign="top">${totaldata.goodDebit}</td>
+		<td align="right" valign="top">${totaldata.paymentAmount}</td>
+		<td align="right" valign="top">${totaldata.rejectRecord}</td>
+		<td align="right" valign="top">${totaldata.rejectAmount}</td>
+	</tr>
+</table>
+<table align="left" width="90%" >
+	<tr>
+		<td style="height: 70px;"></td>
+	</tr>
+	<tr>
+		<td align="right" width="50" >Enter :</td>
+		<td align="right" class="b2"></td>
+		<td align="right"  width="50" >Checker : </td>
+		<td align="right" class="b2" ></td>
+		<td align="right"  width="50">Approval :</td>
+		<td align="right" class="b2" ></td>
+	</tr>
+</table>
+
+</body>
+
+</html>

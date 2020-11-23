@@ -1,0 +1,83 @@
+
+
+#http://myzuul.com:9527/yyicbcservice-pro1/dept/list
+#踩坑：访问路径大小写敏感
+server:
+  port: 9001
+  tomcat:
+    uri-encoding: utf-8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  application:
+    name: yyicbc-zuul-gateway
+  devtools:
+    restart:
+      enabled: false
+  security:
+    user:
+      roles: ACTUATOR_ADMIN
+      name: yyicbc
+      password: 123456
+    session:
+      store-type: none
+
+eureka:
+  instance:
+    instance-id: zuulgateway-9001
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://eureka8001.com:8001/eureka #设置与eureka server 交互的地址查询服务和注册服务都需要依赖的地址
+      #集群配置
+#      defaultZone: http://eureka8001.com:8001/eureka/,http://eureka8002.com:8002/eureka/,http://eureka8003.com:8003/eureka/
+
+
+#http://myzuul.com:9527/yymacau/yyicbc/dept/list
+zuul:
+  routes:
+    pro:
+      serviceId: yyprovider-ass-svc
+      path: /pro/**
+      strip-prefix: true
+    quartz:
+      serviceId: yyquart-ass-svc
+        path: /quartz/**
+      strip-prefix: true
+  #多个用"*" ignored-services: "*"
+  ignored-services: "*"
+#  #公共前缀
+  prefix: /yymacau
+#  sensitiveHeaders: Access-Control-Allow-Origin
+#  ignored-headers: Access-Control-Allow-Origin,Vary,X-Frame-Options,token
+
+
+
+info:
+  app:
+    name: zuul-gateway
+
+ribbon:
+  ReadTimeout: 5000
+  SocketTimeout: 5000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2500

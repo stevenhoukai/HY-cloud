@@ -1,0 +1,7 @@
+#服务端口，服务提供者不直接提供服务，而是启动时将服务注册到eureka注册中心，
+#消费者需要与ribbon结合去注册中心寻找服务
+server:
+  port: 8080
+spring:
+  profiles:
+    active: dev

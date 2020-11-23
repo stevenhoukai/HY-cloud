@@ -1,0 +1,52 @@
+NODE_IP: 10.170.198.237
+NODE_PORT: 10000
+
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: spring-boot-admin-server
+  profiles: dev
+  security:
+    user:
+      name: yyicbc
+      password: 123456
+  boot:
+    admin:
+      ui:
+        title: Yyicbc Monitor Center
+        brand: "<img src=\"assets/img/icon-spring-boot-admin.svg\"><span>Yyicbc Monitor Centre</span>"
+
+eureka:
+  client:
+    #是否將自己註冊到註冊中心，開發環境默認關閉，可按需打開
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://10.170.198.237:8002/eureka
+    healthcheck:
+      enabled: true
+  instance:
+    prefer-ip-address: true
+    ip-address: ${NODE_IP}
+    non-secure-port: ${NODE_PORT}
+    hostname: ${NODE_IP}:${NODE_PORT}
+    instance-id: ${NODE_IP}:${NODE_PORT}
+    status-page-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/info
+    health-check-url-path: http://${NODE_IP}:${NODE_PORT}/actuator/health
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    metadata-map:
+      management.port: ${NODE_PORT}
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

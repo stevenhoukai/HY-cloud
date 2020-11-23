@@ -1,0 +1,163 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        @page {
+            size: a4
+        }
+
+        body {
+            font-size: 10px;
+            font-family: MingLiU;
+        }
+
+        table.px {
+            border-collapse: collapse;
+            margin-top: 10px
+        }
+
+        table.px td {
+            border: 1px solid gray;
+            height: 30px;
+            line-height: 30px;
+            padding: 0px 8px;
+        }
+
+        table.ct td {
+            border: 0px
+        }
+
+        td.title {
+            font-size: 10px
+        }
+
+        td.pagehead {
+            font-size: 10px;
+            color: #9f9f9f
+        }
+
+        td.pager div {
+            height: 1px;
+            background: #9f9f9f;
+            width: 100%;
+            overflow: hidden;
+            font-size: 0;
+        }
+
+        table.header {
+            margin-bottom: 20px
+        }
+
+        table.footer {
+            margin-top: 50px;
+        }
+
+        td {
+            padding-right: 20px;
+            font-size: 10px;
+        }
+
+        .b1 {
+            border-bottom: medium double;
+        }
+
+        .b2 {
+            border-bottom: solid 0.5px;
+        }
+
+        .b3 {
+            border-bottom: solid 0.5px
+        }
+
+        .b4 {
+            border-top: solid 0.5px
+        }
+
+    </style>
+</head>
+
+<body>
+<#list datalist as data>
+<table width="700" style="border-collapse:collapse">
+    <tr>
+        <td colspan="4">銀行名稱 : 中國工商銀行（澳門）股份有限公司</td>
+        <td align="right">日期 :</td>
+        <td>${data.date}</td>
+    </tr>
+    <tr>
+        <td colspan="4">報表名稱 : 自動轉帳扣數報表 - ${totaldata.title}</td>
+        <td align="right">時間 :</td>
+        <td>${data.time}</td>
+    </tr>
+    <tr>
+        <td colspan="4">扣數日期 : ${data.tranDate}</td>
+        <td align="right">頁數 :</td>
+        <td>${data.page}</td>
+    </tr>
+    <tr>
+        <td class="b1" width="50">序號</td>
+        <td class="b1" width="100">受益人/供款人編號</td>
+        <td class="b1" width="50">憑單編號</td>
+        <td class="b1" width="50" align="right">金額</td>
+        <td class="b1" width="200" >帳號</td>
+        <td class="b1" width="250" >不能執行原因</td>
+    </tr>
+    <#list data.childList as child>
+    <tr>
+        <td class="b2">${child.seqNo}</td>
+        <td class="b2">${child.customerContract}</td>
+        <td class="b2">${child.notes1}</td>
+        <td class="b2" align="right">${child.amount}</td>
+        <td class="b2">${child.customerAccount}</td>
+        <td class="b2" >${child.errMessage}</td>
+    </tr>
+    </#list>
+</table>
+</#list>
+<table width="500" style="border-collapse:collapse" >
+    <tr>
+        <td style="height: 40px;"></td>
+    </tr>
+    <tr>
+        <td colspan="4">TOTAL</td>
+    </tr>
+    <tr>
+        <td colspan="4" class="b1"></td>
+    </tr>
+    <tr>
+        <td>任意性供款 :</td>
+        <td align="right">${totaldata.ryxgkRecord}</td>
+        <td>金額 :</td>
+        <td align="right">${totaldata.ryxgkAmount}</td>
+    </tr>
+    <tr>
+        <td>外僱聘用費 :</td>
+        <td align="right">${totaldata.wgpyfRecord}</td>
+        <td>金額 :</td>
+        <td align="right">${totaldata.wgpyfAmount}</td>
+    </tr>
+    <tr>
+        <td>強制性長工供款 :</td>
+        <td align="right">${totaldata.qzxcgggRecord}</td>
+        <td>金額 :</td>
+        <td align="right">${totaldata.qzxcgggAmount}</td>
+    </tr>
+    <tr>
+        <td>強制性散工供款 :</td>
+        <td align="right">${totaldata.qzxsgggRecord}</td>
+        <td>金額 :</td>
+        <td align="right">${totaldata.qzxsgggAmount}</td>
+    </tr>
+    <tr>
+        <td>總數 :</td>
+        <td align="right">${totaldata.totalRecord}</td>
+        <td>總金額 :</td>
+        <td align="right">${totaldata.totalAmount}</td>
+    </tr>
+    <tr>
+        <td align="center" style="height: 40px;" colspan="4">*** 報表結束***</td>
+    </tr>
+</table>
+</body>
+</html>

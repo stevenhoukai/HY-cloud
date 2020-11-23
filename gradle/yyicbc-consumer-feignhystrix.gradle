@@ -1,0 +1,10 @@
+project(':yyicbc-consumer-feignhystrix'){
+    dependencies {
+        compile('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+        compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+//        compile('org.projectlombok:lombok')
+//        annotationProcessor 'org.projectlombok:lombok'
+        compile project(":yyicbc-bapi")
+    }
+}

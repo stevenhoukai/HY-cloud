@@ -1,0 +1,44 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'http://repo.maven.apache.org/maven2' }
+        maven { url "http://123.12.13.5:8081/repository/maven-public/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'com.yyicbc'
+version '1.0-SNAPSHOT'
+
+
+
+ext {
+    springCloudVersion = 'Finchley.SR1'
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web:2.0.3.RELEASE')
+    compile('de.codecentric:spring-boot-admin-starter-server:2.0.3')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.0.3.RELEASE')
+}
+
+
+
+
+
+
+
+
+
+

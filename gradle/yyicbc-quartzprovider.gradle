@@ -1,0 +1,17 @@
+//project(':yyicbc-quartzprovider'){
+//    dependencies {
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        implementation 'org.springframework.boot:spring-boot-starter-quartz'
+//        implementation 'org.springframework.boot:spring-boot-starter-web'
+//        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//        implementation 'org.springframework.boot:spring-boot-starter-aop'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+//        implementation 'org.springframework.boot:spring-boot-devtools'
+//        runtimeOnly 'mysql:mysql-connector-java'
+//        compile 'com.alibaba:druid:1.1.10'
+//        compile 'commons-fileupload:commons-fileupload:1.3.1'
+//        compile 'commons-net:commons-net:3.3'
+//        compile project(":yyicbc-bapi")
+//    }
+//}

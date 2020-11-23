@@ -1,0 +1,193 @@
+<html lang="zh" style="background-color: #ffffff" xmlns:th="http://www.thymeleaf.org" >
+<head>
+ 	<style>
+		@page{size:a4}
+ 		body{font-size:10pt;font-family:MingLiU;}
+ 		table.pt{border-collapse:collapse;margin-top:10px}
+		table.pt td{border:1px solid gray;height:30px;line-height:30px;padding:0px 8px;}
+		table.ct td{border:0px}
+		td.title{font-size:10pt}
+		td.pagehead{font-size:10px;color:#9f9f9f}
+		td.pager div{height:1px;background:#9f9f9f;width:100%;overflow:hidden;font-size:0;}
+		table.header{margin-bottom:20px}
+		table.footer{margin-top:50px;}
+ 	</style>
+</head>
+<body>
+${username}${fova_addr}yy123
+<div>
+	<#list userlist as item>
+	<div><p>${item}</p></div>
+	</#list>
+</div>
+
+<table align="center" width="90%">
+		 <tr>
+             <td align="left" colspan="2">&nbsp;</td>
+         </tr>
+		 <tr>
+             <td align="left" colspan="2">&nbsp;</td>
+         </tr>
+		 <tr>
+             <td align="left" colspan="2">&nbsp;</td>
+         </tr>
+ 		<tr>
+ 			<td align="left">To致：</td>
+			<td align="right" class="title"><strong>PAYMENT ADVICE</strong></td>
+		</tr>
+		<tr>
+ 			<td align="left">${loan_name}</td>
+			<td align="right" class="title"><strong>付款通知書</strong></td>
+		</tr>
+		<tr>
+			<td align="left">${fova_addr}</td>
+ 		</tr>
+ 	</table>
+	<table align="center" width="90%" >
+		<tr>
+	   		<td align="left" >DATE日期:${date}</td>
+	   </tr>
+	</table>
+	<table align="center" width="95%" class="header">
+		 <tr>
+			 <td class="pager" colspan="2"><div></div></td>
+		 </tr>
+	</table>
+	<table align="center" width="90%" style="font-size: 12px;border-collapse:separate; border-spacing:0px 20px;">
+		<tr valign="top">
+			<td align="left" style="width:20%">INSURANCE CO.</td>
+			<td align="left"  style="width:20%">保險公司：</td>
+			<td align="left"  style="width:50%">${ins_com_name}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">INSURANCE TYPE</td>
+			<td align="left" style="width:20%">保險種類：</td>
+			<td align="left" style="width:50%">${ins_pro_type_desc}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">POLICY / CERT. NO. </td>
+			<td align="left" style="width:20%">保單/保險證書編號：</td>
+			<td align="left" style="width:50%">${ins_bf_cer_ply_no}&nbsp;${policy_no}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">LOAN / OVERDRAFT NO. </td>
+			<td align="left" style="width:20%">抵押/透支編碼：</td>
+			<td align="left" style="width:50%">${ins_loan_acc}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">MORTGAGEE / LIEN HOLDER</td>
+			<td align="left" style="width:20%">按揭行/受押人:</td>
+			<td align="left" style="width:50%">ICBC(Macau)Ltd.</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">NAME OF INSURED</td>
+			<td align="left" style="width:20%">投保人姓名:</td>
+			<td align="left" style="width:50%">${ins_cus_name}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">SUM INSURED</td>
+			<td align="left" style="width:20%">投保額：</td>
+			<td align="left" style="width:50%">${ins_sum_ins_ccy}&nbsp;${ins_sum_ins_amt}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">GROSS PREMIUM</td>
+			<td align="left" style="width:20%">保費：</td>
+			<td align="left" style="width:50%">${ins_grs_prm_ccy}&nbsp;${ins_grs_prm}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">NET PREMIUM</td>
+			<td align="left" style="width:20%">折實：</td>
+			<td align="left" style="width:50%">${ins_grs_prm_ccy}&nbsp;${ins_net_pay}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">TAX</td>
+			<td align="left" style="width:20%">政府稅：</td>
+			<td align="left" style="width:50%">${ins_grs_prm_ccy}&nbsp;${ins_tax_amt}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">TOTAL PREMIUM</td>
+			<td align="left" style="width:20%">總保費：</td>
+			<td align="left" style="width:50%">${ins_grs_prm_ccy}&nbsp;${ins_ttl_pay_prm}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">RENEWAL PERIOD</td>
+			<td align="left" style="width:20%">續保日期：</td>
+			<td align="left" style="width:50%">From&nbsp;&nbsp;${ins_start_d}&nbsp;&nbsp;To&nbsp;&nbsp;${ins_end_d}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">INTEREST INSURED</td>
+			<td align="left" style="width:20%">受保內容：</td>
+			<td align="left" style="width:50%">ON BUILDING</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">&nbsp;</td>
+			<td align="left" style="width:20%">&nbsp;</td>
+			<td align="left" style="width:50%">(EXCLUDING FOUNDATIONS AND DRAINS)</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">OCCUPATION</td>
+			<td align="left" style="width:20%">佔用性質：</td>
+			<td align="left" style="width:50%">${ins_Occupacy}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">LOCATION</td>
+			<td align="left" style="width:20%">投保地址：</td>
+			<td align="left" style="width:50%">${ins_rsk_loc1}</td>
+		</tr>
+		<tr valign="top">
+			<td align="left" style="width:20%">&nbsp;</td>
+			<td align="left" style="width:20%"> &nbsp;</td>
+			<td align="left" style="width:50%">${ins_rsk_loc2}</td>
+		</tr>
+	</table>
+	 <table align="center" width="95%" class="header">
+		 <tr>
+			 <td class="pager" colspan="2"><div></div></td>
+		 </tr>
+	 </table>
+	<table align="center" width="90%" style="font-size: 10px;">
+		<tr>
+			<td align="left" >Payment will be made by direct debit from A/C No.&nbsp;${ins_fund_acc}&nbsp;and no official receipt will be issued. </td>
+		</tr>
+		<tr>
+			<td align="left" >上述款項將照支尊戶，保費收妥後，不另發收據。 </td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left" >** Please ensure the above account to have sufficient fund for the payment before &nbsp;${payment_before_date} **</td>
+		</tr>
+		<tr>
+			<td align="left" >** 請於上述指定日期前入賬 ** </td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left" >The premium is automatically generated upon this payment advice is issued. If there is any change, the premium being paid will be according to the insured premises' status, the insurance amount and the bank policy.</td>
+		</tr>
+		<tr>
+			<td align="left" >上述保費是按照此付款通知書簽發時計算。如有任何變動，保費的支取將按照閣下投保物業的實際情況、投保金額及銀行政策確定。 </td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left" >If you require any further information in relation to this matter, please contact ICBC Macau customer services hotline at (853) 8899 5588.</td>
+		</tr>
+		<tr>
+			<td align="left" >如閣下需要任何有關本事宜之進一步資料，請致電工銀澳門客戶服務熱線(853)8899 5588。</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="left" >If there is any discrepancy between the English and Chinese versions , the Chinese version shall prevail. </td>
+		</tr>
+		<tr>
+			<td align="left" >中英文版本如有歧義，槪以中文版為準。</td>
+		</tr>
+	</table>
+</body>
+</html>

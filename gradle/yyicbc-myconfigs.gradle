@@ -1,0 +1,6 @@
+project(':yyicbc-myconfigs'){
+    dependencies {
+        compile('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.cloud:spring-cloud-config-server')
+    }
+}

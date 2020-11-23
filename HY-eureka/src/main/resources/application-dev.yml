@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: yyicbc-eureka
+  profiles: dev
+eureka:
+  instance:
+    hostname: 10.170.198.237
+#    hostname: localhost
+#    关闭eureka的自我保护机制
+#  server:
+#    enable-self-preservation: false
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+#      defaultZone: http://eureka8002.com:8002/eureka/,http://eureka8003.com:8003/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+

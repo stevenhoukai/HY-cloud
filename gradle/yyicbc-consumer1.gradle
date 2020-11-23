@@ -1,0 +1,9 @@
+//project(':yyicbc-consumer1'){
+//    dependencies {
+//        implementation 'org.springframework.boot:spring-boot-devtools'
+//        compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+//        compile 'io.springfox:springfox-swagger2:2.6.1'
+//        compile 'io.springfox:springfox-swagger-ui:2.6.1'
+//        compile project(":yyicbc-bapi")
+//    }
+//}
